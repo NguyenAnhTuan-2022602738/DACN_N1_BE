@@ -6,6 +6,9 @@ const authRoutes = require('./routes/auth');
 const productsRoutes = require('./routes/products');
 const ordersRoutes = require('./routes/orders');
 const adminRoutes = require('./routes/admin');
+const wishlistRoutes = require('./routes/wishlist');
+const uploadsRoutes = require('./routes/uploads');
+const cartRoutes = require('./routes/cart');
 
 const PORT = process.env.PORT || 4000;
 
@@ -21,7 +24,10 @@ async function main() {
 
 	app.use('/api/auth', authRoutes);
 	app.use('/api/admin', adminRoutes);
+	app.use('/api/wishlist', wishlistRoutes);
 	app.use('/api/products', productsRoutes);
+	app.use('/api/cart', cartRoutes);
+	app.use('/api/uploads', uploadsRoutes);
 	app.use('/api/orders', ordersRoutes);
 
 	app.get('/', (req, res) => res.json({ ok: true, message: 'ABC Fashion API' }));
