@@ -59,10 +59,16 @@ exports.create = async (req, res) => {
     original_price: body.originalPrice || body.original_price || null,
     cost_price: body.cost_price || null,
     stock_quantity: Number(body.stock) || Number(body.stock_quantity) || 0,
-    is_featured: !!body.featured,
+    min_stock_level: body.min_stock_level || 5,
+    weight: body.weight || 0,
+    dimensions: body.dimensions || '',
+    status: body.status || 'active',
+    is_featured: !!body.featured || !!body.is_featured,
     tags: body.tags || [],
     meta_title: body.meta_title || '',
     meta_description: body.meta_description || '',
+    images: body.images || [],
+    variants: body.variants || [],
     created_by: req.user._id
   };
   const created = await Product.create(doc);

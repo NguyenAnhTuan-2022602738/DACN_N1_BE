@@ -89,7 +89,15 @@ exports.register = async (req, res) => {
     const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
     // set httpOnly cookie
     res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
-    res.json({ user: { id: user._id, email: user.email, name: user.name }, token });
+    res.json({ 
+      user: { 
+        id: user._id, 
+        email: user.email, 
+        name: user.name,
+        role: user.role || 'customer' // Add role to response
+      }, 
+      token 
+    });
 };
 
 exports.login = async (req, res) => {
@@ -104,7 +112,15 @@ exports.login = async (req, res) => {
     expiresIn: "7d",
   });
   res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
-  res.json({ user: { id: user._id, email: user.email, name: user.name }, token });
+  res.json({ 
+    user: { 
+      id: user._id, 
+      email: user.email, 
+      name: user.name,
+      role: user.role || 'customer' // Add role to login response
+    }, 
+    token 
+  });
 };
 
   exports.logout = async (req, res) => {
